@@ -40,7 +40,7 @@ export default async function (req, res) {
       distinctId: email,
       event: "User Created Share Link",
     });
-    await client.shutdown();
+    process.on("SIGTERM", client.shutdown())
 
   } catch (error) {
     console.log(error.message);

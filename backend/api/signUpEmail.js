@@ -45,7 +45,7 @@ const findOrCreateEmailListContact = async (email) => {
       distinctId: email,
       event: "User Requested Stickers",
     });
-    await client.shutdown();
+    process.on('SIGTERM', () => client.shutdown());
 
     // add to loops db
     return await loops.createContact(email, {

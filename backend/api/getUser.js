@@ -86,7 +86,7 @@ const findOrCreateEmailListContact = async (email) => {
       distinctId: email,
       event: "User Signed Up for the Editor",
     });
-    await client.shutdown();
+    process.on("SIGTERM", client.shutdown())
 
     return await loops.createContact(email, {
       source: "Blot editor",
@@ -116,6 +116,6 @@ const addToEmailList = async (email) => {
       distinctId: email,
       event: "User Logged into the Editor",
     });
-    await client.shutdown();
+    process.on("SIGTERM", client.shutdown())
   }
 };
