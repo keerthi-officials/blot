@@ -170,20 +170,20 @@ async function onMessage(message) {
 
 // when user sends a file in slack and the Blot is not currently drawing, then run the code
 app.message(async ({ message, say }) => {
-  try {
     if (running) {
       throw new Error("The Blot is currently drawing, please try again later.")
     }
     running = true;
-    await onMessage(message);
-    running = false;
-  }
-  catch (error) {
-    console.log(error.message);
-    say('Coud not run code: "' + error.message + '"'); // sends error message in Slack
-  }
-  finally {
-    await resetMachine();
-  }
+    try {
+      await onMessage(message)
+    } catch (error) {
+      say('Could not run code: "' + error.message + '"')
+    } finally {
+      try {
+        await resetMachine()
+      } finally {
+        running = false
+      }
+    }
 })
 
