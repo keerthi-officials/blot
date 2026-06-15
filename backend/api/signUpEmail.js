@@ -18,7 +18,7 @@ export default async function (req, res) {
     }
 
     try {
-      addToEmailList(email);
+      await addToEmailList(email);
     } catch (error) {
       console.log("Erred adding loop email:", error);
     }

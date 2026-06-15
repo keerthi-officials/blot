@@ -51,7 +51,7 @@ export default async function (req, res) {
     }
 
     // send login email
-    sendCode(email, login_code);
+    await sendCode(email, login_code);
     console.log("sent login email", { email, login_code });
 
     try {
